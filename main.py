@@ -25,3 +25,4 @@ d, t = get_data(days)
 figure = px.line(x=d, y=t, labels={"x": "Date", "y": "Temperature (F)"})
 # creates line graph
 st.plotly_chart(figure)
+
