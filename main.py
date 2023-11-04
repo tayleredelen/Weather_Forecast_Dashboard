@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.express as px
+from backend import get_data
 
 # plotly is a data visualization library
 
@@ -20,6 +21,8 @@ def get_data(days):
     temperatures = [days * i for i in temperatures]
     return dates, temperatures
 
+
+data = get_data(place, days, option)
 
 d, t = get_data(days)
 figure = px.line(x=d, y=t, labels={"x": "Date", "y": "Temperature (F)"})
