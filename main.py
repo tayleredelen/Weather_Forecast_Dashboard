@@ -29,10 +29,10 @@ if place:
         st.plotly_chart(figure)
 
     if option == "Sky":
-        images = {'Clear': 'images (1)/clear.png',
-                  'Clouds': 'images (1)/cloud.png',
-                  'Rain': 'images (1)/rain.png',
-                  'Snow': 'images (1)/snow.png'}
+        images = {'Clear': 'images/clear.png',
+                  'Clouds': 'images/cloud.png',
+                  'Rain': 'images/rain.png',
+                  'Snow': 'images/snow.png'}
         sky_conditions = [dict["weather"][0]["main"] for dict in filtered_data]
         # pulls list of weather type data dict
         image_paths = [images[condition] for condition in sky_conditions]
