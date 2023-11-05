@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.express as px
 from backend import get_data
+
 # plotly is a data visualization library
 
 # adds title, text input, slider, selectbox, and subheader widgets
@@ -15,20 +16,25 @@ st.subheader(f"{option} for the next {days} in {place}")
 # widgets appear in order written
 
 if place:
+    # get the temp/sky data
     filtered_data = get_data(place, days)
 
-if option == "Temperature":
-# pulls list of all temp data from dict
-    temperatures = [dict["main"]["temp"] for dict in filtered_data]
-# create a temperature plot only if we get temperature data
-    dates = [dict["dt_txt"] for dict in filtered_data]
-    figure = px.line(x=dates, y=temperatures, labels={"x": "Date", "y": "Temperature (C)"})
-# creates line graph
-    st.plotly_chart(figure)
+    if option == "Temperature":
+        # pulls list of all temp data from dict
+        temperatures = [dict["main"]["temp"] for dict in filtered_data]
+        # create a temperature plot only if we get temperature data
+        dates = [dict["dt_txt"] for dict in filtered_data]
+        figure = px.line(x=dates, y=temperatures, labels={"x": "Date", "y": "Temperature (C)"})
+        # creates line graph
+        st.plotly_chart(figure)
 
-
-if option == "Sky":
-    filtered_data = [dict["weather"][0]["main"] for dict in filtered_data]
-# pulls list of weather type data dict
-    st.image()
-
+    if option == "Sky":
+        images = {'Clear': 'images (1)/clear.png',
+                  'Clouds': 'images (1)/cloud.png',
+                  'Rain': 'images (1)/rain.png',
+                  'Snow': 'images (1)/snow.png'}
+        sky_conditions = [dict["weather"][0]["main"] for dict in filtered_data]
+        # pulls list of weather type data dict
+        image_paths = [images[condition] for condition in sky_conditions]
+        print(sky_conditions)
+        st.image(image_paths, width=115)
