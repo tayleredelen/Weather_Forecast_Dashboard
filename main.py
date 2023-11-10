@@ -41,3 +41,4 @@ if place:
             st.image(image_paths, width=115)
     except KeyError:
         st.write("That place does not exist")
+
